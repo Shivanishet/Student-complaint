@@ -3,7 +3,14 @@ body {
   font-family: Arial, sans-serif;
   background: linear-gradient(120deg, #0f172a, #1e293b);
   color: white;
+  
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevent horizontal scroll globally */
+}
+
 
 .layout {
   display: flex;

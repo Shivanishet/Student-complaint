@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
+// Import Navbar
+import Navbar from "./components/Navbar"; // ✅ make sure path is correct
+
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import RaiseComplaint from "./pages/RaiseComplaint";
@@ -15,40 +18,31 @@ import TrackComplaint from "./pages/TrackComplaint";
 import AdminAllComplaints from "./pages/AdminAllComplaints";
 import AdminReports from "./pages/AdminReports";
 import LandingPage from "./pages/LandingPage";
-import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 
 function Layout() {
   const location = useLocation();
-
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
+  // Pages where Navbar should NOT appear
+  const hideNavbarRoutes = ["/", "/login", "/about", "/contact","/dashboard","/raise-complaint","/track-complaint"]; // add more routes if needed
+  const showNavbar = !hideNavbarRoutes.includes(location.pathname);
+
   return (
     <>
-      {/* ✅ Hide Navbar only on Landing Page */}
-      {location.pathname !== "/" && <Navbar />}
+      {showNavbar && <Navbar />}
 
-      {/* ✅ REQUIRED for page transition */}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          {/* Landing page */}
           <Route path="/" element={<LandingPage />} />
-
           <Route path="/contact" element={<Contact />} />
-
-
-          {/* Login */}
           <Route path="/login" element={<Login />} />
-
-          {/* Dashboard */}
           <Route
             path="/dashboard"
             element={token ? <Dashboard /> : <Navigate to="/login" />}
           />
-
-          {/* Admin: All Complaints */}
           <Route
             path="/admin-all-complaints"
             element={
@@ -59,8 +53,6 @@ function Layout() {
               )
             }
           />
-
-          {/* Admin: Reports */}
           <Route
             path="/admin-reports"
             element={
@@ -71,28 +63,19 @@ function Layout() {
               )
             }
           />
-
           <Route path="/about" element={<About />} />
-
-          {/* Raise Complaint */}
           <Route
             path="/raise-complaint"
             element={token ? <RaiseComplaint /> : <Navigate to="/login" />}
           />
-
-          {/* View Complaints */}
           <Route
             path="/view-complaints"
             element={token ? <ViewComplaints /> : <Navigate to="/login" />}
           />
-
-          {/* Track Complaint */}
           <Route
             path="/track-complaint"
             element={token ? <TrackComplaint /> : <Navigate to="/login" />}
           />
-
-          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </AnimatePresence>

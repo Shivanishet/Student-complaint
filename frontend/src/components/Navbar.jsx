@@ -93,6 +93,7 @@ const styles = {
     textDecoration: "none",
     fontSize: "14px",
     padding: "6px 8px",
+    flexWrap: "wrap",
   },
 
   logoutBtn: {

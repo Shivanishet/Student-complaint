@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import logo from "../assets/college-logo.svg";
@@ -65,7 +65,7 @@ const LandingPage = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <motion.h1 style={styles.heading}>Welcome to Our College</motion.h1>
+        <motion.h1 style={styles.heading}>Welcome to Our BMSCE</motion.h1>
         <motion.p style={styles.text}>
           Manage your complaints efficiently with our Student Complaint System.
         </motion.p>

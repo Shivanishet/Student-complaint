@@ -87,7 +87,7 @@ const RaiseComplaint = () => {
   required
 >
   <option value="" disabled>
-    Write Category
+    Category
   </option>
   <option value="Academics">Academics</option>
   <option value="Hostel">Hostel</option>
@@ -111,11 +111,7 @@ const RaiseComplaint = () => {
         />
 
         {/* File Upload */}
-        <input
-          type="file"
-          onChange={(e) => setFile(e.target.files[0])}
-          style={styles.input}
-        />
+        
 
         <button type="submit" style={styles.submitBtn}>
           Submit Complaint
