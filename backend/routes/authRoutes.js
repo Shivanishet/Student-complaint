@@ -36,27 +36,48 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "Student email not found. Please login again." });
+    if (!user)
+      return res
+        .status(404)
+        .json({ message: "Student email not found. Please register." });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid password" });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid password" });
 
-    // ✅ FIX IS HERE
+    // ✅ ONLY 4 ADMINS USING IF STATEMENT
+    let role = "student";
+
+    if (
+      email === "shivani.cs24@bmsce.ac.in" ||
+      email === "shivayogi.cs24@bmsce.ac.in" ||
+      email === "shashankspatil.cs24@bmsce.ac.in" ||
+      email === "shashankns.cs24@bmsce.ac.in"
+    ) {
+      role = "admin";
+    }
+
     const token = jwt.sign(
       {
         id: user._id,
-        email: user.email,   // 🔑 ADD THIS
-        role: user.role
+        email: user.email,
+        role: role, // ✅ use calculated role
       },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
-    res.json({ token, role: user.role, name: user.name, email: user.email });
+    res.json({
+      token,
+      role: role,
+      name: user.name,
+      email: user.email,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 
 

@@ -27,7 +27,7 @@ function Layout() {
   const role = localStorage.getItem("role");
 
   // Pages where Navbar should NOT appear
-  const hideNavbarRoutes = ["/", "/login", "/about", "/contact","/dashboard","/raise-complaint","/track-complaint"]; // add more routes if needed
+  const hideNavbarRoutes = ["/", "/login", "/about", "/contact","/dashboard","/raise-complaint","/track-complaint","/view-complaints","/admin-all-complaints","/admin-reports"]; // add more routes if needed
   const showNavbar = !hideNavbarRoutes.includes(location.pathname);
 
   return (

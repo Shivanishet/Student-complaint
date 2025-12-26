@@ -14,22 +14,22 @@ const Contact = () => {
       phone: "6360877518",
     },
     {
-      name: "Member Two",
+      name: "Shivayogi",
       role: "Admin",
-      email: "backend@example.com",
-      phone: "9000000000",
+      email: "shivayogi.cs24@bmsce.ac.in",
+      phone: "9008855283",
     },
     {
-      name: "Member Three",
+      name: "Shashank S Patil",
       role: "Admin",
-      email: "database@example.com",
-      phone: "9000000001",
+      email: "shashankspatil.cs24@bmsce.ac.in",
+      phone: "8660806538",
     },
     {
-      name: "Member Four",
+      name: "Shashank N S",
       role: "Admin",
-      email: "guide@example.com",
-      phone: "9000000002",
+      email: "shashankns.cs24@bmsce.ac.in",
+      phone: "7338345452",
     },
   ];
 

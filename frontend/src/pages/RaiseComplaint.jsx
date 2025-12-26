@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import API from "../services/api";
+import bgImage from "../assets/Raise.jpeg";
+import logo from "../assets/college-logo.svg";
+import { motion } from "framer-motion";
 
 const RaiseComplaint = () => {
   const navigate = useNavigate();
@@ -12,6 +15,7 @@ const RaiseComplaint = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,80 +55,123 @@ const RaiseComplaint = () => {
     }
   };
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
+  const navLinks = [
+    { name: "Track", onClick: () => navigate("/track-complaint") },
+    { name: "View", onClick: () => navigate("/view-complaints") },
+    { name: "Dashboard", onClick: () => navigate("/dashboard") },
+  ];
+
   return (
     <div style={styles.page}>
-      <h2 style={styles.heading}>Raise Complaint</h2>
-
-      {error && <p style={styles.error}>{error}</p>}
-      {success && <p style={styles.success}>{success}</p>}
-
-      <form style={styles.form} onSubmit={handleSubmit}>
-        {/* Name */}
-        <input
-          type="text"
-          placeholder="Student Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={styles.input}
-          required
-        />
-
-        {/* Title */}
-        <input
-          type="text"
-          placeholder="Complaint Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={styles.input}
-          required
-        />
-
-        {/* Category */}
-        <select
-  value={category}
-  onChange={(e) => setCategory(e.target.value)}
-  style={styles.input}
-  required
->
-  <option value="" disabled>
-    Category
-  </option>
-  <option value="Academics">Academics</option>
-  <option value="Hostel">Hostel</option>
-  <option value="Infrastructure">Infrastructure</option>
-  <option value="Examination">Examination</option>
-  <option value="Faculty">Faculty</option>
-  <option value="Administration">Administration</option>
-  <option value="Transport">Transport</option>
-  <option value="Cafeteria">Cafeteria</option>
-  <option value="Other">Other</option>
-</select>
-
-
-        {/* Description */}
-        <textarea
-          placeholder="Complaint Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          style={{ ...styles.input, height: "100px" }}
-          required
-        />
-
-        {/* File Upload */}
-        
-
-        <button type="submit" style={styles.submitBtn}>
-          Submit Complaint
-        </button>
-
-        <button
-          type="button"
-          style={styles.backBtn}
-          onClick={() => navigate("/dashboard")}
+      <div style={styles.overlay}>
+        {/* Navbar */}
+        <motion.div
+          style={styles.navbar}
+          initial={{ y: -40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          Back to Dashboard
-        </button>
-      </form>
+          <div style={styles.left}>
+            <img src={logo} alt="College Logo" style={styles.logo} />
+            <h3 style={styles.navTitle}>Student Complaint System</h3>
+          </div>
+          <div style={styles.links}>
+            {navLinks.map((link, idx) => (
+              <motion.span
+                key={idx}
+                onClick={link.onClick}
+                onMouseEnter={() => setHoverIndex(idx)}
+                onMouseLeave={() => setHoverIndex(null)}
+                whileHover={{ scale: 1.1 }}
+                style={{
+                  ...styles.link,
+                  color: hoverIndex === idx ? "#eb0505ff" : "#fff",
+                }}
+              >
+                {link.name}
+              </motion.span>
+            ))}
+            <motion.span
+              onClick={logout}
+              onMouseEnter={() => setHoverIndex(navLinks.length)}
+              onMouseLeave={() => setHoverIndex(null)}
+              whileHover={{ scale: 1.1 }}
+              style={{
+                ...styles.link,
+                color: hoverIndex === navLinks.length ? "#eb0505ff" : "#fff",
+              }}
+            >
+              Logout
+            </motion.span>
+          </div>
+        </motion.div>
+
+        {/* Page Heading */}
+        <h2 style={styles.heading}>Raise Complaint</h2>
+
+        {error && <p style={styles.error}>{error}</p>}
+        {success && <p style={styles.success}>{success}</p>}
+
+        <form style={styles.form} onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Student Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={styles.input}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Complaint Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={styles.input}
+            required
+          />
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            style={styles.input}
+            required
+          >
+            <option value="" disabled>
+              Category
+            </option>
+            <option value="Academics">Academics</option>
+            <option value="Hostel">Hostel</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Examination">Examination</option>
+            <option value="Faculty">Faculty</option>
+            <option value="Administration">Administration</option>
+            <option value="Transport">Transport</option>
+            <option value="Cafeteria">Cafeteria</option>
+            <option value="Other">Other</option>
+          </select>
+          <textarea
+            placeholder="Complaint Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            style={{ ...styles.input, height: "100px" }}
+            required
+          />
+          <button type="submit" style={styles.submitBtn}>
+            Submit Complaint
+          </button>
+          <button
+            type="button"
+            style={styles.backBtn}
+            onClick={() => navigate("/dashboard")}
+          >
+            Back to Dashboard
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
@@ -132,11 +179,21 @@ const RaiseComplaint = () => {
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "linear-gradient(135deg, #667eea, #764ba2)",
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "40px 20px",
+    paddingTop: "80px", // leave space for navbar
+  },
+  overlay: {
+    width: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   heading: {
     color: "#fff",
@@ -180,14 +237,28 @@ const styles = {
     cursor: "pointer",
     marginTop: "5px",
   },
-  error: {
-    color: "red",
-    textAlign: "center",
+  error: { color: "red", textAlign: "center" },
+  success: { color: "green", textAlign: "center" },
+
+  /* Navbar styles */
+  navbar: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "70px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0 5px",
+    backgroundColor: "transparent",
+    zIndex: 100,
   },
-  success: {
-    color: "green",
-    textAlign: "center",
-  },
+  left: { display: "flex", alignItems: "center", gap: "14px" },
+  logo: { height: "50px", width: "50px" },
+  navTitle: { fontSize: "20px", fontWeight: "600", color: "#fff" },
+  links: { display: "flex", gap: "15px", cursor: "pointer", paddingRight: "10px" },
+  link: { transition: "color 0.3s ease", fontSize: "16px", padding: "6px 10px", borderRadius: "6px" },
 };
 
 export default RaiseComplaint;

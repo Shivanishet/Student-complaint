@@ -1,6 +1,6 @@
  import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import logo from "../assets/college-logo.svg";
 import collegePhoto from "../assets/college-photo1.png";
 
@@ -65,9 +65,9 @@ const LandingPage = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <motion.h1 style={styles.heading}>Welcome to Our BMSCE</motion.h1>
+        <motion.h1 style={styles.heading}>Welcome to BMSCE</motion.h1>
         <motion.p style={styles.text}>
-          Manage your complaints efficiently with our Student Complaint System.
+          Manage your complaints efficiently with  Student Complaint System.
         </motion.p>
 
         <motion.button
@@ -140,11 +140,15 @@ const styles = {
   },
   heading: {
     fontSize: "52px",
-    fontWeight: "700",
+    fontWeight: "800",
+    color: "#101010ff",
+
   },
   text: {
     fontSize: "20px",
-    maxWidth: "600px",
+    maxWidth: "700px",
+    color: "#121213de", 
+    fontWeight: "600",
   },
   cta: {
     padding: "14px 28px",
@@ -155,6 +159,7 @@ const styles = {
     cursor: "pointer",
     color: "white",
   },
+  
 };
 
 export default LandingPage;

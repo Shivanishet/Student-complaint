@@ -27,28 +27,51 @@ const Login = () => {
   ];
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    try {
-      if (isRegister) {
-        await API.post("/auth/register", { name, email, password, role });
-      }
-
-      const res = await API.post("/auth/login", { email, password, role });
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.role);
-      localStorage.setItem("name", res.data.name);
-      localStorage.setItem("studentEmail", email);
-
-      navigate("/dashboard");
-    } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          (isRegister ? "Registration failed" : "Login failed")
-      );
+  // ❌ Block unauthorized admin login
+  if (role === "admin") {
+    if (
+      email !== "shivani.cs24@bmsce.ac.in" &&
+      email !== "shivayogi.cs24@bmsce.ac.in" &&
+      email !== "shashankspatil.cs24@bmsce.ac.in" &&
+      email !== "shashankns.cs24@bmsce.ac.in"
+    ) {
+      setError("You are not authorized to login as admin");
+      return;
     }
-  };
+  }
+
+  // ❌ Restrict student email domain
+  if (role === "student") {
+    if (!email.endsWith("@bmsce.ac.in")) {
+      setError("invalid student email domain");
+      return;
+    }
+  }
+
+  try {
+    if (isRegister) {
+      await API.post("/auth/register", { name, email, password, role });
+    }
+
+    const res = await API.post("/auth/login", { email, password, role });
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("role", res.data.role);
+    localStorage.setItem("name", res.data.name);
+    localStorage.setItem("studentEmail", email);
+
+    navigate("/dashboard");
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+        (isRegister ? "Registration failed" : "Login failed")
+    );
+  }
+};
+
 
   return (
     <>

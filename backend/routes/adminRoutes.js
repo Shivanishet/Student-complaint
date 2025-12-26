@@ -20,16 +20,22 @@ router.get("/complaints", authMiddleware, adminMiddleware, async (req, res) => {
 // -------------------
 // GET reports/statistics
 // -------------------
+// -------------------
+// GET reports/statistics
+// -------------------
 router.get("/reports", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const complaints = await Complaint.find().sort({ createdAt: -1 });
     const total = complaints.length;
 
+    // Normalize status strings to avoid mismatches
+    const normalize = (s) => s.toLowerCase().replace(/\s/g, "");
+
     const statusCounts = {
-      submitted: complaints.filter(c => c.status === "Submitted").length,
-      inprogress: complaints.filter(c => c.status === "In Progress").length,
-      resolved: complaints.filter(c => c.status === "Resolved").length,
-      closed: complaints.filter(c => c.status === "Closed").length,
+      submitted: complaints.filter(c => normalize(c.status) === "submitted").length,
+      inprogress: complaints.filter(c => normalize(c.status) === "inprogress").length,
+      resolved: complaints.filter(c => normalize(c.status) === "resolved").length,
+      closed: complaints.filter(c => normalize(c.status) === "closed").length,
     };
 
     const complaintData = complaints.map(c => ({
