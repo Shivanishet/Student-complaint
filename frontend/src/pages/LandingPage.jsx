@@ -1,6 +1,6 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import logo from "../assets/college-logo.svg";
 import collegePhoto from "../assets/college-photo1.png";
 
@@ -9,26 +9,27 @@ const LandingPage = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const navLinks = [
-   { name: "Home", onClick: () => window.location.href = "/" },
-
+    { name: "Home", onClick: () => (window.location.href = "/") },
     { name: "Login", onClick: () => navigate("/login") },
-   { name: "About", onClick: () => navigate("/about") },
-
-   { name: "Contact", onClick: () => navigate("/contact") }
-
+    { name: "About", onClick: () => navigate("/about") },
+    { name: "Contact", onClick: () => navigate("/contact") },
   ];
 
   return (
-
     <motion.div
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  exit={{ opacity: 0, x: -100 }}   // 👈 THIS IS THE BUTTON CLICK EFFECT
-  transition={{ duration: 0.6, ease: "easeInOut" }}
-  style={{ ...styles.container, backgroundImage: `url(${collegePhoto})` }}
->
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: -100 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+      style={{
+        ...styles.container,
+        backgroundImage: `url(${collegePhoto})`,
+      }}
+    >
+      {/* 🔥 DARK OVERLAY */}
+      <div style={styles.overlay}></div>
 
-    
+      {/* NAVBAR */}
       <motion.div
         style={styles.navbar}
         initial={{ y: -40, opacity: 0 }}
@@ -50,7 +51,7 @@ const LandingPage = () => {
               whileHover={{ scale: 1.1 }}
               style={{
                 ...styles.link,
-                color: hoverIndex === idx ? "#eb0505ff" : "#111",
+                color: hoverIndex === idx ? "#ef4444" : "#ffffff",
               }}
             >
               {link.name}
@@ -59,15 +60,19 @@ const LandingPage = () => {
         </div>
       </motion.div>
 
+      {/* HERO CONTENT */}
       <motion.div
         style={styles.content}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <motion.h1 style={styles.heading}>Welcome to BMSCE</motion.h1>
+        <motion.h1 style={styles.heading}>
+          Welcome to BMSCE
+        </motion.h1>
+
         <motion.p style={styles.text}>
-          Manage your complaints efficiently with  Student Complaint System.
+          Manage your complaints efficiently with Student Complaint System.
         </motion.p>
 
         <motion.button
@@ -83,9 +88,11 @@ const LandingPage = () => {
   );
 };
 
-/* ✅ VERY IMPORTANT: styles must be defined here */
+/* ================= STYLES ================= */
+
 const styles = {
   container: {
+    position: "relative",
     height: "100vh",
     width: "100%",
     backgroundSize: "cover",
@@ -94,8 +101,18 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-    color: "#111",
   },
+
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.25)", // 🔥 adjust if needed
+    zIndex: 1,
+  },
+
   navbar: {
     position: "sticky",
     top: 0,
@@ -105,30 +122,38 @@ const styles = {
     padding: "0 60px",
     height: "70px",
     backgroundColor: "transparent",
-    zIndex: 20,
+    zIndex: 3,
   },
+
   left: {
     display: "flex",
     alignItems: "center",
     gap: "14px",
   },
+
   logo: {
     height: "50px",
     width: "50px",
   },
+
   title: {
     fontSize: "20px",
     fontWeight: "600",
+    color: "#ffffff",
   },
+
   links: {
     display: "flex",
     gap: "30px",
     cursor: "pointer",
   },
+
   link: {
     transition: "color 0.3s ease",
     fontSize: "16px",
+    fontWeight: "500",
   },
+
   content: {
     flex: 1,
     display: "flex",
@@ -137,20 +162,26 @@ const styles = {
     justifyContent: "center",
     textAlign: "center",
     gap: "15px",
+    zIndex: 3,
   },
+
   heading: {
     fontSize: "52px",
     fontWeight: "800",
-    color: "#101010ff",
-
+    color: "#ffffff",
+    textShadow: "2px 4px 10px rgba(0,0,0,0.8)",
   },
+
   text: {
     fontSize: "20px",
     maxWidth: "700px",
-    color: "#121213de", 
-    fontWeight: "600",
+    color: "#f1f1f1",
+    fontWeight: "500",
+    textShadow: "1px 2px 8px rgba(0,0,0,0.7)",
   },
+
   cta: {
+    marginTop: "10px",
     padding: "14px 28px",
     fontSize: "18px",
     backgroundColor: "#ef4444",
@@ -159,7 +190,6 @@ const styles = {
     cursor: "pointer",
     color: "white",
   },
-  
 };
 
 export default LandingPage;
