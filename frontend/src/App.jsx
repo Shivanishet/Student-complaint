@@ -8,7 +8,7 @@ import {
 import { AnimatePresence } from "framer-motion";
 
 // Import Navbar
-import Navbar from "./components/Navbar"; // ✅ make sure path is correct
+import Navbar from "./components/Navbar"; 
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";

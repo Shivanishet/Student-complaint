@@ -110,8 +110,8 @@ const Contact = () => {
           <div>
             <h4 style={styles.footerTitle}>Contact</h4>
             <p style={styles.footerText}>
-              Email: shivanishet035@gmail.com<br />
-              Phone : 6360877518
+              Email: complaint123@gmail.com<br />
+              Phone : +91 00134 34987
             </p>
           </div>
         </div>

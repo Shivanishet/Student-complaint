@@ -27,7 +27,7 @@ const complaintSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "Pending",
+      default: "Submitted",
     },
     file: {
       type: String,
