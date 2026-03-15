@@ -11,12 +11,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://student-complaint-git-main-s-projects-4b1e1451.vercel.app"
-  ]
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
