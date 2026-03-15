@@ -17,7 +17,7 @@ const AdminReports = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/admin/reports", {
+        const res = await fetch("https://student-complaint-d516.onrender.com/api/admin/reports", {
           headers: {
             "Content-Type": "application/json",
             Authorization: token,

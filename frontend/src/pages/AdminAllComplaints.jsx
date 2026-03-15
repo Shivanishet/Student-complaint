@@ -15,7 +15,7 @@ const AdminAllComplaints = () => {
 
   const fetchComplaints = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/admin/complaints", {
+      const res = await axios.get("https://student-complaint-d516.onrender.com/api/admin/complaints", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setComplaints(res.data);
@@ -33,7 +33,7 @@ const AdminAllComplaints = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/admin/complaints/${id}/status`,
+        `https://student-complaint-d516.onrender.com/api/admin/complaints/${id}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
