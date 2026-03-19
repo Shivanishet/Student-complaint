@@ -57,6 +57,7 @@ This system provides a **digital and structured way** to handle complaints:
 6.Student tracks progress
 
 **📁 Project Structure**
+
 student-complaint-system/
 
 │── frontend/
