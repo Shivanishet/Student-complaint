@@ -92,6 +92,8 @@ Check out the project here:
 <img width="1899" height="910" alt="Screenshot 2025-12-24 221608" src="https://github.com/user-attachments/assets/6e7b69a6-b19b-4392-8969-4a2547084308" />
 
 
+<img width="1895" height="912" alt="image" src="https://github.com/user-attachments/assets/b46d09fc-365e-4119-84b3-5a3a5390e345" />
+
 
 <img width="1903" height="905" alt="Screenshot 2025-12-24 221648" src="https://github.com/user-attachments/assets/f711c752-155b-4e12-8ce5-c6a5708ad8a8" />
 
