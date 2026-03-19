@@ -2,7 +2,7 @@
 
 **🔗 Live Demo:** https://student-complaint-ten.vercel.app
 
-**💻 Source Code:** https://github.com/your-username/student-complaint-system
+**💻 Source Code:** https://https://github.com/Shivanishet/Student-complaint
 
 **📌 Overview**
 
@@ -68,7 +68,7 @@ student-complaint-system/
 
 **1️⃣ Clone the repository**
 
-git clone https://github.com/your-username/student-complaint-system.git
+git clone https://github.com/Shivanishet/Student-complaint
 
 **2️⃣ Navigate into the folder**
 
