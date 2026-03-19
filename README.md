@@ -2,7 +2,7 @@
 
 **🔗 Live Demo:** https://student-complaint-ten.vercel.app
 
-**💻 Source Code:** https://https://github.com/Shivanishet/Student-complaint
+**💻 Source Code:** https://github.com/Shivanishet/Student-complaint
 
 **📌 Overview**
 
