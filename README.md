@@ -58,10 +58,11 @@ This system provides a **digital and structured way** to handle complaints:
 
 **📁 Project Structure**
 student-complaint-system/
+
 │── frontend/
+
 │── backend/
-│── database/
-│── assets/
+
 │── README.md
 
 **⚙️ Installation & Setup**
@@ -96,6 +97,7 @@ Check out the project here:
 
 
 <img width="1903" height="905" alt="Screenshot 2025-12-24 221648" src="https://github.com/user-attachments/assets/f711c752-155b-4e12-8ce5-c6a5708ad8a8" />
+
 
 
 **🎯 Future Improvements**
